@@ -1,0 +1,40 @@
+Patrones de Fabrica Abstracta
+
+Que son? 
+
+es un patrón de diseño creacional que nos permite producir familias de objetos relacionados sin especificar sus clases concretas.
+
+Tiene un inconveniente: A mayor complejidad o diversidad de objetos, hay que actualizar el codigo de los objetos individuales con el tiempo y energia que conlleva.
+
+La solución?
+
+1- Hacer una declaración explícita de interfaces para cada producto diferente de la familia de productos PADRE/MADRE
+
+interface Silla{} ==> interface sillaMadera {} || interface sillaPlastico 
+
+2- Hacer una declaración de `Fabrica Abstracta` => interfaz con la lista de metodos de creación de los productos, 
+estos metodos devolverán productos abstractos, representador por las interfaces declaradas explícitamente.
+
+interface FabricaAbstracta {
+  createSilla(): Silla
+  createSillon(): Sillon
+  createSofa(): Sofa
+}
+
+3- Ahora solo falta crear las variantes abstractas: Estilo, antiguedad, etc
+
+interface FabricaAbstractaVictoriana implements FabricaAbstracta {
+  createSilla(): Silla {}
+  createSillon(): Sillon {}
+  createSofa(): Sofa{}
+}interface FabricaAbstractaModerna implements FabricaAbstracta {
+  createSilla(): Silla {}
+  createSillon(): Sillon{}
+  createSofa(): Sofa{}
+}
+
+Conclusión:
+
+El código cliente tiene que funcionar con fábricas y productos a través de sus respectivas interfaces abstractas.
+Esto nos permite cambiar el tipo de fábrica que pasamos al código cliente, así como la variante del producto que recibe el código cliente, sin descomponer el propio código cliente.
+
